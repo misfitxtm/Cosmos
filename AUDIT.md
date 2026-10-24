@@ -30,6 +30,7 @@ What an attacker gains is the user's own privileges. Cosmos never runs as root a
 | 9 | Info | Hooks were not shown before running | Fixed: `--dry-run` lists them, a real run prints them first |
 | 10 | Info | Only PNG was fuzzed; JPEG and WebP had no tests with real files | Fixed: all three formats tested; 3x3000 mutations per run, plus an opt-in 450,000-mutation run (`cargo test --release -- --ignored`), no panics |
 | 11 | Info | Icon test only banned scripts and links | Extended: `url(http`, `@import`, `data:`, `<use` |
+| 12 | Low | `write_atomic` made every replaced file `0644`, so a private destination (for example a template aimed at a `0600` file) became readable by other local users. Found in a re-audit on 2026-10-24 | Fixed: the replaced regular file's permissions are copied onto the temp file before the rename; a replaced symlink does not lend its target's mode. Tests in `write.rs` (the first fails against the old code) |
 
 No critical or high findings. No panics reachable from input: there is no `unwrap`, `expect` or `panic!` outside tests, and `unsafe_code` is forbidden in every crate.
 
