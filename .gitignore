@@ -1,0 +1,33 @@
+# Build output
+/target/
+
+# Dependency copies made for packaging (packaging/make-sources.sh)
+/vendor/
+/packaging/out/
+
+# Local cargo settings, such as the vendored-sources redirect used for offline builds
+/.cargo/
+
+# RPM build results and working folders
+*.rpm
+*.src.rpm
+/rpmbuild/
+
+# Editors and operating system leftovers
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Backups and logs
+*.bak
+*.orig
+*.log
+
+# Working notes that are not part of the project
+/PLAN.md
+/HYPORA-REPO.md
+
+# Cargo.lock is NOT listed on purpose: Cosmos is an application, and the installer
+# and RPM build use --locked, so the lock file must be committed.

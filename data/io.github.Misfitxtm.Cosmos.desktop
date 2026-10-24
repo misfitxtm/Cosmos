@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Cosmos
+GenericName=Wallpaper Theme Maker
+Comment=Make a desktop theme from a wallpaper
+Exec=@BINDIR@/cosmos-gtk
+Icon=io.github.Misfitxtm.Cosmos
+Terminal=false
+Categories=Graphics;GTK;
+Keywords=wallpaper;theme;colors;colours;palette;
+StartupNotify=true

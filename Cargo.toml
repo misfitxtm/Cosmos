@@ -1,0 +1,21 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+# The window needs GTK4 development files, so plain `cargo test` leaves it out
+default-members = ["crates/cosmos-core", "crates/cosmos-out", "crates/cosmos-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/Misfitxtm/Cosmos"
+
+[workspace.dependencies]
+cosmos-core = { path = "crates/cosmos-core", version = "0.1.0" }
+cosmos-out = { path = "crates/cosmos-out", version = "0.1.0" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "deny"

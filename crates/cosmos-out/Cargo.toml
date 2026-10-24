@@ -1,0 +1,14 @@
+[package]
+name = "cosmos-out"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+cosmos-core.workspace = true
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints]
+workspace = true
