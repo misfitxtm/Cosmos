@@ -1,0 +1,3 @@
+# The Cosmos icon has its own terms (crates/cosmos-cli/assets/LICENSE-ICON), so the License
+# tag names it with a custom reference that Fedora's list of licences does not know.
+addFilter(r"invalid-license LicenseRef-Cosmos-icon")

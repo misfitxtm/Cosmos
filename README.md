@@ -130,7 +130,7 @@ cargo build --release
 cargo test
 ```
 
-The window lives in its own part (`cosmos-ui`) that needs `gtk4-devel`. Build it with `cargo build --release -p cosmos-ui`. A starting point for an RPM is in `packaging/`; it hasn't been test-built yet.
+The window lives in its own part (`cosmos-ui`) that needs `gtk4-devel`. Build it with `cargo build --release -p cosmos-ui`. An RPM spec for Fedora is in `packaging/`. Run `packaging/make-sources.sh` to make the source files, then `rpmbuild -ba packaging/cosmos.spec` (or `mock`) to build it.
 
 ## Licence
 
