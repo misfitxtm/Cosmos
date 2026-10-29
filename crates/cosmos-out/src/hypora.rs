@@ -2,6 +2,11 @@
 //! Writes a Hypora theme: `~/.config/hypora/themes/<name>/colors.toml` plus the wallpaper.
 //! `hypora-theme` pastes these values into a sed script, so every value written here is
 //! a `#rrggbb` or a plain name, and nothing the user typed reaches the file unchecked.
+//! Cosmos does not have to be used with Hypora but similar to Omarchy the intention is that this is 
+//! used alongside Hypora. All a work in progress so please be gentle. I hate RUST. But I also love
+//! it soooooo much!!!
+//!
+//! Check out my website for more of my projects and Cybersecurity writeups. www.mizfitxtm.dev
 
 use std::ffi::OsStr;
 use std::fs;

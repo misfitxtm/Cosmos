@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
+// Main function cli.
 mod args;
 mod config;
 mod run;

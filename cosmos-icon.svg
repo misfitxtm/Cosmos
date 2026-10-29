@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Palette slots: replace these five hex values with colors extracted from the wallpaper -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0d1a"/>
+      <stop offset="1" stop-color="#1d1f3d"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#f4d6a0"/>
+      <stop offset="0.5" stop-color="#d9826b"/>
+      <stop offset="1" stop-color="#6b3fa0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Rounded-square app tile -->
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <g fill="#ffffff" opacity="0.85">
+    <circle cx="52" cy="60" r="2.5"/>
+    <circle cx="206" cy="48" r="2"/>
+    <circle cx="214" cy="190" r="2.5"/>
+    <circle cx="44" cy="200" r="1.8"/>
+    <circle cx="180" cy="222" r="1.5"/>
+  </g>
+
+  <!-- Orbit rings -->
+  <g fill="none" stroke-width="5" stroke-linecap="round">
+    <ellipse cx="128" cy="128" rx="92" ry="36" transform="rotate(-24 128 128)" stroke="#4a5a8a" opacity="0.7"/>
+    <ellipse cx="128" cy="128" rx="68" ry="26" transform="rotate(-24 128 128)" stroke="#8fa3d4" opacity="0.5"/>
+  </g>
+
+  <!-- Central core (the "wallpaper" glow) -->
+  <circle cx="128" cy="128" r="44" fill="url(#core)"/>
+
+  <!-- Five palette dots orbiting the core -->
+  <g>
+    <circle cx="220" cy="128" r="9" fill="#f4d6a0"/>
+    <circle cx="165" cy="72" r="8" fill="#d9826b"/>
+    <circle cx="82" cy="78" r="8" fill="#6b3fa0"/>
+    <circle cx="36" cy="128" r="9" fill="#8fa3d4"/>
+    <circle cx="130" cy="186" r="8" fill="#4a5a8a"/>
+  </g>
+</svg>
