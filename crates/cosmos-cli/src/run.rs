@@ -116,6 +116,7 @@ pub fn run(args: Args) -> Res<()> {
                 finish_apply(
                     hypora::apply(&hypora::theme_program(), &root, name),
                     name,
+                    &root,
                     &say,
                 )?;
             }
@@ -152,12 +153,17 @@ pub fn run(args: Args) -> Res<()> {
     Ok(())
 }
 
-fn finish_apply(outcome: Applied, name: &ThemeName, say: &dyn Fn(String)) -> Res<()> {
+fn finish_apply(outcome: Applied, name: &ThemeName, root: &Path, say: &dyn Fn(String)) -> Res<()> {
     match outcome {
         Applied::Done { previous } => {
             say(format!("switched to {}", name.as_str()));
             if let Some(p) = previous.filter(|p| p != name) {
                 say(format!("to go back: hypora-theme {}", p.as_str()));
+            }
+            if let Some(cmd) = hypora::boot_screen_hint(root, Path::new(hypora::BOOT_THEME)) {
+                say(format!(
+                    "the boot screen is still the old theme; run: {cmd}"
+                ));
             }
             Ok(())
         }

@@ -3,7 +3,7 @@
 //! It sets no colours of its own, so it follows whatever GTK theme the desktop uses.
 
 use std::cell::{Cell, RefCell};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::rc::Rc;
 
 use cosmos_core::color::Hex;
@@ -408,6 +408,13 @@ fn save_theme(ui: &Rc<Ui>) {
                         msg.push_str(&format!(" Switched to {}.", name.as_str()));
                         if let Some(p) = previous.filter(|p| *p != name) {
                             msg.push_str(&format!(" To go back: hypora-theme {}.", p.as_str()));
+                        }
+                        if let Some(cmd) =
+                            hypora::boot_screen_hint(&root, Path::new(hypora::BOOT_THEME))
+                        {
+                            msg.push_str(&format!(
+                                " The boot screen is still the old theme; run: {cmd}"
+                            ));
                         }
                     }
                     Applied::FellBack { previous, error } => {

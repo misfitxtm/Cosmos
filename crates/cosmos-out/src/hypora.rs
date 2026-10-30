@@ -2,7 +2,7 @@
 //! Writes a Hypora theme: `~/.config/hypora/themes/<name>/colors.toml` plus the wallpaper.
 //! `hypora-theme` pastes these values into a sed script, so every value written here is
 //! a `#rrggbb` or a plain name, and nothing the user typed reaches the file unchecked.
-//! Cosmos does not have to be used with Hypora but similar to Omarchy the intention is that this is 
+//! Cosmos does not have to be used with Hypora but similar to Omarchy the intention is that this is
 //! used alongside Hypora. All a work in progress so please be gentle. I hate RUST. But I also love
 //! it soooooo much!!!
 //!
@@ -137,6 +137,17 @@ pub enum Applied {
 pub fn current_theme(root: &Path) -> Option<ThemeName> {
     let text = read_limited_text(&root.join("current/name"), NAME_MAX).ok()?;
     ThemeName::parse(text.trim()).ok()
+}
+
+/// Where the boot screen theme is installed; only root can change it.
+pub const BOOT_THEME: &str = "/usr/share/plymouth/themes/hypora/hypora.plymouth";
+
+/// What to run when the boot screen still shows an older theme, or `None` if it is current.
+/// `hypora-theme` renders the new boot screen but leaves the root-owned install to this command.
+pub fn boot_screen_hint(root: &Path, installed: &Path) -> Option<&'static str> {
+    let rendered = read_limited(&root.join("current/plymouth.plymouth"), CONFIG_MAX).ok()?;
+    let have = read_limited(installed, CONFIG_MAX).ok()?; // no boot theme installed: nothing to update
+    (rendered != have).then_some("sudo hypora-boot apply")
 }
 
 /// Runs `hypora-theme NAME`. If that fails, puts back whatever was active before:
@@ -362,6 +373,20 @@ mod tests {
             base: None,
             force: false,
         }
+    }
+
+    #[test]
+    fn boot_hint_only_when_the_installed_copy_differs() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        let installed = root.join("hypora.plymouth");
+        fs::create_dir_all(root.join("current")).unwrap();
+        fs::write(root.join("current/plymouth.plymouth"), "new").unwrap();
+        assert_eq!(boot_screen_hint(root, &installed), None); // nothing installed
+        fs::write(&installed, "old").unwrap();
+        assert!(boot_screen_hint(root, &installed).is_some());
+        fs::write(&installed, "new").unwrap();
+        assert_eq!(boot_screen_hint(root, &installed), None);
     }
 
     #[test]
